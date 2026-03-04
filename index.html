@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wedding</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>ΑΚΟΥΣΑΤΕ ΑΚΟΥΣΑΤΕ</h1>
+<h2>WE'RE GETTING MARRIED ΒΡΕ ΑΔΕΡΦΕ</h2>
+
+<p class="small">Σε λίγο...</p>
+
+<div class="countdown">
+
+<div class="circle">
+<span id="days">0</span>
+<p>ΜΕΡΕΣ</p>
+</div>
+
+<div class="circle">
+<span id="hours">0</span>
+<p>ΩΡΕΣ</p>
+</div>
+
+<div class="circle">
+<span id="minutes">0</span>
+<p>ΛΕΠΤΑ</p>
+</div>
+
+<div class="circle">
+<span id="seconds">0</span>
+<p>ΔΕΥΤ</p>
+</div>
+
+</div>
+
+<p class="small">γάμος γίνεται</p>
+
+<button class="location" onclick="openMap()">
+📍 Τοποθεσία Εκκλησίας
+</button>
+
+<p class="small" id="dateText"></p>
+
+<div class="section">
+
+<h3>ΟΙΚΟΓΕΝΕΙΕΣ</h3>
+
+<p>Οικογένεια Γαμπρού</p>
+<p>Οικογένεια Νύφης</p>
+
+</div>
+
+<div class="section">
+
+<h3>ΚΟΥΜΠΑΡΟΙ</h3>
+
+<p>Κουμπάρος</p>
+<p>Κουμπάρα</p>
+
+</div>
+
+<button class="giftButton" onclick="openGift()">🎁 Δώρο</button>
+
+<div class="phones">
+
+<p>Γαμπρός: 69XXXXXXXX</p>
+<p>Νύφη: 69XXXXXXXX</p>
+
+</div>
+
+</div>
+
+
+<div id="giftModal" class="modal">
+
+<div class="modalContent">
+
+<h3>Στοιχεία Δώρου</h3>
+
+<p><b>IBAN</b></p>
+<p>GRXXXXXXXXXXXXXXXX</p>
+
+<p><b>IRIS</b></p>
+<p>69XXXXXXXX</p>
+<p>69XXXXXXXX</p>
+
+<button onclick="closeGift()">Κλείσιμο</button>
+
+</div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
