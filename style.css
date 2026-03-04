@@ -1,5 +1,5 @@
 :root{
-  --bg:#fbf6ed;              /* κρεμ */
+  --bg:#fbf6ed;
   --ink:#1f1f1f;
   --muted:#5d5d5d;
   --glass: rgba(255,255,255,.68);
@@ -34,10 +34,8 @@ body{
   box-shadow: var(--shadow);
   padding: clamp(18px, 3.8vw, 42px);
   overflow: hidden;
-  position: relative;
 }
 
-/* “fade sections” */
 .fade{
   background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.05));
   border: 1px solid rgba(0,0,0,.06);
@@ -47,14 +45,12 @@ body{
 }
 
 @keyframes floatIn{
-  from{ transform: translateY(8px); opacity: .0; }
+  from{ transform: translateY(8px); opacity: 0; }
   to{ transform: translateY(0); opacity: 1; }
 }
 
 /* HERO */
-.hero{
-  padding: 22px 20px;
-}
+.hero{ padding: 22px 20px; }
 
 .kicker{
   margin:0;
@@ -76,7 +72,7 @@ body{
 .miniLines{
   margin-top: 14px;
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .mini{
@@ -86,18 +82,52 @@ body{
   line-height: 1.5;
 }
 
+/* NEW: inline timer chips */
+.inlineTimer{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  margin: 0 6px;
+  vertical-align: middle;
+}
+
+.tChip{
+  display:inline-flex;
+  align-items:baseline;
+  gap:4px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+.tChip b{
+  color: var(--ink);
+  font-weight: 1000;
+}
+
+.tChip small{
+  font-size: 11px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
+
 /* LOCATION */
 .locationRow{
   display:flex;
   flex-wrap:wrap;
   gap:10px;
   align-items:center;
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 .locationHint{
   color: var(--muted);
   font-size: 13px;
+}
+
+.seLabel{
+  padding-left: 2px;
 }
 
 /* BUTTONS */
@@ -127,10 +157,7 @@ body{
 }
 
 /* COUNTDOWN */
-.countdownWrap{
-  margin-top: 14px;
-  padding: 18px;
-}
+.countdownWrap{ margin-top: 14px; padding: 18px; }
 
 .countTop{
   display:flex;
@@ -232,20 +259,11 @@ body{
   border-radius: 14px;
 }
 
-.niceList .name{
-  font-weight: 900;
-}
-
-.niceList .meta{
-  color: var(--muted);
-  font-weight: 700;
-  font-size: 12px;
-}
+.niceList .name{ font-weight: 900; }
+.niceList .meta{ color: var(--muted); font-weight: 700; font-size: 12px; }
 
 /* FOOTER */
-.footerArea{
-  margin-top: 14px;
-}
+.footerArea{ margin-top: 14px; }
 
 .footerRow{
   display:flex;
@@ -275,7 +293,6 @@ body{
   padding: 18px;
   z-index: 50;
 }
-
 .backdrop.open{ display:flex; }
 
 .modal{
@@ -285,12 +302,6 @@ body{
   overflow:hidden;
   box-shadow: 0 30px 90px rgba(0,0,0,.28);
   border: 1px solid rgba(0,0,0,.10);
-  animation: pop .18s ease both;
-}
-
-@keyframes pop{
-  from{ transform: scale(.98); opacity: .0; }
-  to{ transform: scale(1); opacity: 1; }
 }
 
 .modalHead{
@@ -326,7 +337,6 @@ body{
   border-radius: 12px;
   font-size: 18px;
 }
-
 .iconBtn:hover{ background: rgba(0,0,0,.06); }
 
 .modalBody{
@@ -340,15 +350,7 @@ body{
   border-radius: 16px;
   padding: 12px;
   display:grid;
-  gap: 8px;
-}
-
-.payTop{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
   gap: 10px;
-  flex-wrap:wrap;
 }
 
 .payLabel{
@@ -366,16 +368,17 @@ body{
   overflow:auto;
 }
 
-.copyBtn{
+/* NEW: copy button κάτω από το κάθε IBAN/IRIS */
+.copyUnderBtn{
   border: 1px solid rgba(0,0,0,.12);
   background: rgba(0,0,0,.02);
   padding: 10px 12px;
   border-radius: 14px;
   cursor:pointer;
   font-weight: 900;
+  width: fit-content;
 }
-
-.copyBtn:hover{ background: rgba(0,0,0,.05); }
+.copyUnderBtn:hover{ background: rgba(0,0,0,.05); }
 
 .hint{
   margin:0;
