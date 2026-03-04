@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wedding</title>
-
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -14,30 +13,53 @@
 
       <!-- Top announcement -->
       <header class="hero fade">
-        <p class="kicker" id="kickerText">ΑΚΟΥΣΑΤΕ ΑΚΟΥΣΑΤΕ</p>
-        <h1 class="title" id="titleText">WE’RE GETTING MARRIED ΒΡΕ ΑΔΕΡΦΕ</h1>
+        <p class="kicker">ΑΚΟΥΣΑΤΕ ΑΚΟΥΣΑΤΕ</p>
+        <h1 class="title">WE’RE GETTING MARRIED ΒΡΕ ΑΔΕΡΦΕ</h1>
 
+        <!-- 1) Εδώ μπαίνει το inline countdown δίπλα-δίπλα -->
         <div class="miniLines">
-          <p class="mini" id="line1">Σε … μέρες… γα…</p>
-          <p class="mini" id="line2">Σε … μέρες γάμος γίνεται.</p>
+          <p class="mini">
+            Σε
+            <span class="inlineTimer">
+              <span class="tChip"><b id="tDays">0</b><small>μ</small></span>
+              <span class="tChip"><b id="tHours">00</b><small>ω</small></span>
+              <span class="tChip"><b id="tMinutes">00</b><small>λ</small></span>
+              <span class="tChip"><b id="tSeconds">00</b><small>δ</small></span>
+            </span>
+            γα…
+          </p>
 
+          <p class="mini">
+            Σε
+            <span class="inlineTimer">
+              <span class="tChip"><b id="tDays2">0</b><small>μ</small></span>
+              <span class="tChip"><b id="tHours2">00</b><small>ω</small></span>
+              <span class="tChip"><b id="tMinutes2">00</b><small>λ</small></span>
+              <span class="tChip"><b id="tSeconds2">00</b><small>δ</small></span>
+            </span>
+            γάμος γίνεται.
+          </p>
+
+          <!-- 2) Πριν το κουμπί μπαίνει το "Σε" -->
           <div class="locationRow">
+            <span class="mini seLabel">Σε</span>
             <button class="btn btnLocation" id="locationBtn" type="button">
               📍 Τοποθεσία Εκκλησίας
             </button>
             <span class="locationHint" id="locationLabel">[Εξωτική εκκλησία]</span>
           </div>
 
+          <!-- 3) Μετά το "Στις" μπαίνει η ημερομηνία 26/03/2028 -->
           <p class="mini" id="dateLine">
-            Στις … ο … παντρεύεται και παίρνει την Ναταλιαααα.
+            Στις 26/03/2028 ο Ιωάννης παντρεύεται και παίρνει την Ναταλιαααα.
           </p>
         </div>
       </header>
 
-      <!-- Countdown -->
+      <!-- Countdown μεγάλα κυκλάκια -->
       <section class="fade countdownWrap" aria-label="Αντίστροφη μέτρηση">
         <div class="countTop">
-          <p class="countLabel" id="countLabel">ΜΕΝΟΥΝ</p>
+          <p class="countLabel">ΜΕΝΟΥΝ</p>
           <p class="countDaysText" id="countDaysText">0 μέρες</p>
         </div>
 
@@ -47,15 +69,15 @@
             <span class="bubbleLab">ΜΕΡΕΣ</span>
           </div>
           <div class="bubble">
-            <span class="bubbleNum" id="hours">0</span>
+            <span class="bubbleNum" id="hours">00</span>
             <span class="bubbleLab">ΩΡΕΣ</span>
           </div>
           <div class="bubble">
-            <span class="bubbleNum" id="minutes">0</span>
+            <span class="bubbleNum" id="minutes">00</span>
             <span class="bubbleLab">ΛΕΠΤΑ</span>
           </div>
           <div class="bubble">
-            <span class="bubbleNum" id="seconds">0</span>
+            <span class="bubbleNum" id="seconds">00</span>
             <span class="bubbleLab">ΔΕΥΤ</span>
           </div>
         </div>
@@ -67,12 +89,24 @@
       <section class="grid2">
         <div class="fade">
           <h2 class="sectionTitle">ΟΙΚΟΓΕΝΕΙΕΣ</h2>
-          <ul class="niceList" id="familiesList"></ul>
+
+          <!-- 4) Αφήνω χώρο για 4 ονόματα -->
+          <ul class="niceList">
+            <li><span class="name">[Όνομα 1]</span><span class="meta"></span></li>
+            <li><span class="name">[Όνομα 2]</span><span class="meta"></span></li>
+            <li><span class="name">[Όνομα 3]</span><span class="meta"></span></li>
+            <li><span class="name">[Όνομα 4]</span><span class="meta"></span></li>
+          </ul>
         </div>
 
         <div class="fade">
           <h2 class="sectionTitle">ΚΟΥΜΠΑΡΟΙ</h2>
-          <ul class="niceList" id="koumparoiList"></ul>
+
+          <!-- 4) Αφήνω χώρο για 2 ονόματα -->
+          <ul class="niceList">
+            <li><span class="name">[Κουμπάρος/Κουμπάρα 1]</span><span class="meta"></span></li>
+            <li><span class="name">[Κουμπάρος/Κουμπάρα 2]</span><span class="meta"></span></li>
+          </ul>
         </div>
       </section>
 
@@ -85,50 +119,51 @@
           <p class="tiny">Πατάς “ΔΩΡΟ” και ανοίγει IBAN + IRIS (με αντιγραφή).</p>
         </div>
 
-        <div class="phones" id="phones"></div>
+        <!-- 6) Στο τέλος ονόματα + τηλέφωνα -->
+        <div class="phones">
+          <div><b>Τηλέφωνα νεόνυμφων</b></div>
+          <div>Ιωάννης: <b id="phoneGroom">+30 69XXXXXXXX</b></div>
+          <div>Ναταλία: <b id="phoneBride">+30 69XXXXXXXX</b></div>
+        </div>
       </section>
 
     </section>
   </main>
 
-  <!-- Gift Modal -->
+  <!-- 5) Gift Modal -->
   <div class="backdrop" id="giftModal" role="dialog" aria-modal="true" aria-label="Στοιχεία δώρου">
     <div class="modal">
       <div class="modalHead">
         <div class="modalHeadLeft">
           <span class="modalTag">ΣΤΟΙΧΕΙΑ ΔΩΡΟΥ</span>
-          <span class="modalSub">Ό,τι πρέπει για κατάθεση/IRIS</span>
+          <span class="modalSub">IBAN & IRIS</span>
         </div>
         <button class="iconBtn" id="closeGift" type="button" aria-label="Κλείσιμο">✕</button>
       </div>
 
       <div class="modalBody">
+        <!-- IBAN -->
         <div class="payCard">
-          <div class="payTop">
-            <span class="payLabel">IBAN</span>
-            <button class="copyBtn" type="button" data-copy="iban">Αντιγραφή</button>
-          </div>
+          <span class="payLabel">IBAN</span>
           <code class="codeBox" id="ibanCode">GR…</code>
-          <p class="hint" id="ibanHint">Δικαιούχος: …</p>
+          <button class="copyUnderBtn" type="button" data-copy="iban">Αντιγραφή</button>
         </div>
 
+        <!-- IRIS 1 -->
         <div class="payCard">
-          <div class="payTop">
-            <span class="payLabel">IRIS 1</span>
-            <button class="copyBtn" type="button" data-copy="iris1">Αντιγραφή</button>
-          </div>
+          <span class="payLabel">IRIS 1</span>
           <code class="codeBox" id="iris1Code">69…</code>
+          <button class="copyUnderBtn" type="button" data-copy="iris1">Αντιγραφή</button>
         </div>
 
+        <!-- IRIS 2 -->
         <div class="payCard">
-          <div class="payTop">
-            <span class="payLabel">IRIS 2</span>
-            <button class="copyBtn" type="button" data-copy="iris2">Αντιγραφή</button>
-          </div>
+          <span class="payLabel">IRIS 2</span>
           <code class="codeBox" id="iris2Code">69…</code>
+          <button class="copyUnderBtn" type="button" data-copy="iris2">Αντιγραφή</button>
         </div>
 
-        <p class="hint" id="giftNote">Tip: Αιτιολογία “Δώρο γάμου”.</p>
+        <p class="hint">Tip: Αιτιολογία “Δώρο γάμου”.</p>
       </div>
     </div>
   </div>
