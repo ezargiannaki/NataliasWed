@@ -1,102 +1,30 @@
-const weddingDate = new Date("Apr 17, 2026 18:00:00").getTime()
+// =====================
+// ΡΥΘΜΙΣΕΙΣ (ΑΛΛΑΖΕΙΣ ΜΟΝΟ ΕΔΩ)
+// =====================
 
-function updateCountdown(){
+// Γάμος: 26/03/2028 (έβαλα ώρα 18:00 τοπική — αν θες άλλη, άλλαξέ το)
+const WEDDING_DATE_LOCAL = "2028-03-26T18:00:00";
 
-const now = new Date().getTime()
+// Link Google Maps της εκκλησίας
+const LOCATION_URL = "https://www.google.com/maps";
 
-const distance = weddingDate - now
+// Κείμενο δίπλα στο κουμπί
+const LOCATION_LABEL = "Εξωτική εκκλησία";
 
-const days = Math.floor(distance / (1000 * 60 * 60 * 24))
-const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-const seconds = Math.floor((distance % (1000 * 60)) / 1000)
+// Στοιχεία δώρου
+const IBAN = "GRXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+const IRIS_1 = "+30 69XXXXXXXX";
+const IRIS_2 = "+30 69XXXXXXXX";
 
-document.getElementById("days").innerText = days
-document.getElementById("hours").innerText = hours
-document.getElementById("minutes").innerText = minutes
-document.getElementById("seconds").innerText = seconds
-
-}
-
-setInterval(updateCountdown,1000)
-
-updateCountdown()
-
-
-function openMap(){
-
-window.open("https://maps.google.com")
-
-}
-
-
-function openGift(){
-
-document.getElementById("giftModal").style.display="flex"
-
-}
-
-function closeGift(){
-
-document.getElementById("giftModal").style.display="none"
-
-}
+// Τηλέφωνα νεόνυμφων
+const PHONE_GROOM = "+30 69XXXXXXXX";
+const PHONE_BRIDE = "+30 69XXXXXXXX";
 
 // =====================
-// 1) ΡΥΘΜΙΣΕΙΣ (CONFIG)
-// =====================
-const CONFIG = {
-  // Header texts
-  kicker: "ΑΚΟΥΣΑΤΕ ΑΚΟΥΣΑΤΕ",
-  title: "WE’RE GETTING MARRIED ΒΡΕ ΑΔΕΡΦΕ",
-
-  groomName: "Ιωάννης",
-  brideName: "Ναταλιαααα",
-
-  // Wedding date/time (τοπική ώρα)
-  // Προσοχή: format ISO με timezone offset Ελλάδας (+02:00 ή +03:00 ανά εποχή)
-  weddingDateISO: "2026-04-17T18:00:00+03:00",
-
-  // Location button
-  locationLabel: "Εξωτική εκκλησία • [βάλε περιοχή]",
-  locationUrl: "https://www.google.com/maps", // βάλε εδώ το link του pin από Google Maps
-
-  // Lists
-  families: [
-    { name: "Οικογένεια Γαμπρού", meta: "Πατέρας • Μητέρα" },
-    { name: "Οικογένεια Νύφης", meta: "Πατέρας • Μητέρα" },
-  ],
-  koumparoi: [
-    { name: "Κουμπάρος 1", meta: "Όνομα Επώνυμο" },
-    { name: "Κουμπάρα 2", meta: "Όνομα Επώνυμο" },
-  ],
-
-  // Phones
-  phones: {
-    groom: "+30 69XXXXXXXX",
-    bride: "+30 69XXXXXXXX",
-  },
-
-  // Gift modal
-  gift: {
-    iban: "GRXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-    beneficiary: "Δικαιούχος: Ιωάννης … / Ναταλία …",
-    iris1: "+30 69XXXXXXXX",
-    iris2: "+30 69XXXXXXXX",
-    note: "Tip: Αιτιολογία “Δώρο γάμου”.",
-  },
-};
-
-// =====================
-// 2) HELPERS
+// HELPERS
 // =====================
 const $ = (id) => document.getElementById(id);
-
-function pad2(n){ return String(n).padStart(2, "0"); }
-
-function pluralGR(n, one, many){
-  return n === 1 ? one : many;
-}
+const pad2 = (n) => String(n).padStart(2, "0");
 
 function safeOpen(url){
   try{
@@ -106,86 +34,68 @@ function safeOpen(url){
   }
 }
 
-// =====================
-// 3) FILL STATIC CONTENT
-// =====================
-function fillContent(){
-  $("kickerText").textContent = CONFIG.kicker;
-  $("titleText").textContent = CONFIG.title;
-
-  $("locationLabel").textContent = CONFIG.locationLabel;
-
-  // Lines with names/date
-  const weddingDate = new Date(CONFIG.weddingDateISO);
-  const dateStr = weddingDate.toLocaleDateString("el-GR", { day:"2-digit", month:"long", year:"numeric" });
-  const timeStr = weddingDate.toLocaleTimeString("el-GR", { hour:"2-digit", minute:"2-digit" });
-
-  $("dateLine").textContent = `Στις ${dateStr} (${timeStr}) ο ${CONFIG.groomName} παντρεύεται και παίρνει την ${CONFIG.brideName}.`;
-
-  // Lists
-  const fam = $("familiesList");
-  fam.innerHTML = "";
-  CONFIG.families.forEach(item => {
-    const li = document.createElement("li");
-    li.innerHTML = `<span class="name">${item.name}</span><span class="meta">${item.meta || ""}</span>`;
-    fam.appendChild(li);
-  });
-
-  const kou = $("koumparoiList");
-  kou.innerHTML = "";
-  CONFIG.koumparoi.forEach(item => {
-    const li = document.createElement("li");
-    li.innerHTML = `<span class="name">${item.name}</span><span class="meta">${item.meta || ""}</span>`;
-    kou.appendChild(li);
-  });
-
-  // Phones
-  $("phones").innerHTML = `
-    <div><b>Τηλέφωνα νεόνυμφων</b></div>
-    <div>Γαμπρός: <b>${CONFIG.phones.groom}</b></div>
-    <div>Νύφη: <b>${CONFIG.phones.bride}</b></div>
-  `;
-
-  // Gift modal content
-  $("ibanCode").textContent = CONFIG.gift.iban;
-  $("ibanHint").textContent = CONFIG.gift.beneficiary || "";
-  $("iris1Code").textContent = CONFIG.gift.iris1;
-  $("iris2Code").textContent = CONFIG.gift.iris2;
-  $("giftNote").textContent = CONFIG.gift.note || "";
-
-  // Location button
-  $("locationBtn").addEventListener("click", () => safeOpen(CONFIG.locationUrl));
+async function copyText(text, btn){
+  try{
+    await navigator.clipboard.writeText(text);
+    const old = btn.textContent;
+    btn.textContent = "Έγινε!";
+    setTimeout(() => (btn.textContent = old), 900);
+  }catch(e){
+    alert("Δεν μπόρεσα να αντιγράψω. Κάνε χειροκίνητα copy.");
+  }
 }
 
 // =====================
-// 4) COUNTDOWN
+// FILL STATIC
+// =====================
+function fillStatic(){
+  $("locationLabel").textContent = LOCATION_LABEL;
+  $("locationBtn").addEventListener("click", () => safeOpen(LOCATION_URL));
+
+  $("ibanCode").textContent = IBAN;
+  $("iris1Code").textContent = IRIS_1;
+  $("iris2Code").textContent = IRIS_2;
+
+  $("phoneGroom").textContent = PHONE_GROOM;
+  $("phoneBride").textContent = PHONE_BRIDE;
+}
+
+// =====================
+// COUNTDOWN
 // =====================
 let timer = null;
 
 function updateCountdown(){
-  const target = new Date(CONFIG.weddingDateISO).getTime();
+  const target = new Date(WEDDING_DATE_LOCAL).getTime();
   const now = Date.now();
   let diff = target - now;
-
   if (diff < 0) diff = 0;
 
   const totalSeconds = Math.floor(diff / 1000);
-
   const days = Math.floor(totalSeconds / 86400);
   const hours = Math.floor((totalSeconds % 86400) / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
+  // Big bubbles
   $("days").textContent = days;
   $("hours").textContent = pad2(hours);
   $("minutes").textContent = pad2(minutes);
   $("seconds").textContent = pad2(seconds);
 
-  $("countDaysText").textContent = `${days} ${pluralGR(days, "μέρα", "μέρες")}`;
+  $("countDaysText").textContent = `${days} μέρες`;
 
-  // μικρές ατάκες
-  $("line1").textContent = `Σε ${days} ${pluralGR(days, "μέρα", "μέρες")}… γα…`;
-  $("line2").textContent = `Σε ${days} ${pluralGR(days, "μέρα", "μέρες")} γάμος γίνεται.`;
+  // Inline chips (line 1)
+  $("tDays").textContent = days;
+  $("tHours").textContent = pad2(hours);
+  $("tMinutes").textContent = pad2(minutes);
+  $("tSeconds").textContent = pad2(seconds);
+
+  // Inline chips (line 2)
+  $("tDays2").textContent = days;
+  $("tHours2").textContent = pad2(hours);
+  $("tMinutes2").textContent = pad2(minutes);
+  $("tSeconds2").textContent = pad2(seconds);
 
   if (totalSeconds === 0){
     $("afterCountdownLine").textContent = "ΣΗΜΕΡΑ ΕΙΝΑΙ Η ΜΕΡΑ! 💍";
@@ -199,7 +109,7 @@ function startCountdown(){
 }
 
 // =====================
-// 5) MODAL + COPY
+// MODAL
 // =====================
 const modal = $("giftModal");
 const openGiftBtn = $("giftBtn");
@@ -215,17 +125,6 @@ function closeModal(){
   document.body.style.overflow = "";
 }
 
-async function copyText(text, btn){
-  try{
-    await navigator.clipboard.writeText(text);
-    const old = btn.textContent;
-    btn.textContent = "Έγινε!";
-    setTimeout(() => (btn.textContent = old), 900);
-  }catch(e){
-    alert("Δεν μπόρεσα να αντιγράψω. Κάνε χειροκίνητα copy.");
-  }
-}
-
 function setupModal(){
   openGiftBtn.addEventListener("click", openModal);
   closeGiftBtn.addEventListener("click", closeModal);
@@ -238,22 +137,18 @@ function setupModal(){
     if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
   });
 
-  document.querySelectorAll(".copyBtn").forEach(btn => {
+  document.querySelectorAll(".copyUnderBtn").forEach(btn => {
     btn.addEventListener("click", () => {
       const key = btn.getAttribute("data-copy");
-      const map = {
-        iban: CONFIG.gift.iban,
-        iris1: CONFIG.gift.iris1,
-        iris2: CONFIG.gift.iris2,
-      };
+      const map = { iban: IBAN, iris1: IRIS_1, iris2: IRIS_2 };
       copyText(map[key] || "", btn);
     });
   });
 }
 
 // =====================
-// 6) INIT
+// INIT
 // =====================
-fillContent();
+fillStatic();
 startCountdown();
 setupModal();
