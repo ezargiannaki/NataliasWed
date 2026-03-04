@@ -1,108 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="el">
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wedding</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Wedding</title>
-
-<link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+  <main class="wrap">
+    <section class="card">
 
-<div class="container">
+      <!-- Top announcement -->
+      <header class="hero fade">
+        <p class="kicker" id="kickerText">ΑΚΟΥΣΑΤΕ ΑΚΟΥΣΑΤΕ</p>
+        <h1 class="title" id="titleText">WE’RE GETTING MARRIED ΒΡΕ ΑΔΕΡΦΕ</h1>
 
-<h1>ΑΚΟΥΣΑΤΕ ΑΚΟΥΣΑΤΕ</h1>
-<h2>WE'RE GETTING MARRIED ΒΡΕ ΑΔΕΡΦΕ</h2>
+        <div class="miniLines">
+          <p class="mini" id="line1">Σε … μέρες… γα…</p>
+          <p class="mini" id="line2">Σε … μέρες γάμος γίνεται.</p>
 
-<p class="small">Σε λίγο...</p>
+          <div class="locationRow">
+            <button class="btn btnLocation" id="locationBtn" type="button">
+              📍 Τοποθεσία Εκκλησίας
+            </button>
+            <span class="locationHint" id="locationLabel">[Εξωτική εκκλησία]</span>
+          </div>
 
-<div class="countdown">
+          <p class="mini" id="dateLine">
+            Στις … ο … παντρεύεται και παίρνει την Ναταλιαααα.
+          </p>
+        </div>
+      </header>
 
-<div class="circle">
-<span id="days">0</span>
-<p>ΜΕΡΕΣ</p>
-</div>
+      <!-- Countdown -->
+      <section class="fade countdownWrap" aria-label="Αντίστροφη μέτρηση">
+        <div class="countTop">
+          <p class="countLabel" id="countLabel">ΜΕΝΟΥΝ</p>
+          <p class="countDaysText" id="countDaysText">0 μέρες</p>
+        </div>
 
-<div class="circle">
-<span id="hours">0</span>
-<p>ΩΡΕΣ</p>
-</div>
+        <div class="countGrid">
+          <div class="bubble">
+            <span class="bubbleNum" id="days">0</span>
+            <span class="bubbleLab">ΜΕΡΕΣ</span>
+          </div>
+          <div class="bubble">
+            <span class="bubbleNum" id="hours">0</span>
+            <span class="bubbleLab">ΩΡΕΣ</span>
+          </div>
+          <div class="bubble">
+            <span class="bubbleNum" id="minutes">0</span>
+            <span class="bubbleLab">ΛΕΠΤΑ</span>
+          </div>
+          <div class="bubble">
+            <span class="bubbleNum" id="seconds">0</span>
+            <span class="bubbleLab">ΔΕΥΤ</span>
+          </div>
+        </div>
 
-<div class="circle">
-<span id="minutes">0</span>
-<p>ΛΕΠΤΑ</p>
-</div>
+        <p class="tiny" id="afterCountdownLine">… μέχρι να γίνει ο γάμος 😄</p>
+      </section>
 
-<div class="circle">
-<span id="seconds">0</span>
-<p>ΔΕΥΤ</p>
-</div>
+      <!-- Families + Koumparoi -->
+      <section class="grid2">
+        <div class="fade">
+          <h2 class="sectionTitle">ΟΙΚΟΓΕΝΕΙΕΣ</h2>
+          <ul class="niceList" id="familiesList"></ul>
+        </div>
 
-</div>
+        <div class="fade">
+          <h2 class="sectionTitle">ΚΟΥΜΠΑΡΟΙ</h2>
+          <ul class="niceList" id="koumparoiList"></ul>
+        </div>
+      </section>
 
-<p class="small">γάμος γίνεται</p>
+      <!-- Gift + phones -->
+      <section class="fade footerArea">
+        <div class="footerRow">
+          <button class="btn btnGift" id="giftBtn" type="button" aria-haspopup="dialog" aria-controls="giftModal">
+            🎁 ΔΩΡΟ
+          </button>
+          <p class="tiny">Πατάς “ΔΩΡΟ” και ανοίγει IBAN + IRIS (με αντιγραφή).</p>
+        </div>
 
-<button class="location" onclick="openMap()">
-📍 Τοποθεσία Εκκλησίας
-</button>
+        <div class="phones" id="phones"></div>
+      </section>
 
-<p class="small" id="dateText"></p>
+    </section>
+  </main>
 
-<div class="section">
+  <!-- Gift Modal -->
+  <div class="backdrop" id="giftModal" role="dialog" aria-modal="true" aria-label="Στοιχεία δώρου">
+    <div class="modal">
+      <div class="modalHead">
+        <div class="modalHeadLeft">
+          <span class="modalTag">ΣΤΟΙΧΕΙΑ ΔΩΡΟΥ</span>
+          <span class="modalSub">Ό,τι πρέπει για κατάθεση/IRIS</span>
+        </div>
+        <button class="iconBtn" id="closeGift" type="button" aria-label="Κλείσιμο">✕</button>
+      </div>
 
-<h3>ΟΙΚΟΓΕΝΕΙΕΣ</h3>
+      <div class="modalBody">
+        <div class="payCard">
+          <div class="payTop">
+            <span class="payLabel">IBAN</span>
+            <button class="copyBtn" type="button" data-copy="iban">Αντιγραφή</button>
+          </div>
+          <code class="codeBox" id="ibanCode">GR…</code>
+          <p class="hint" id="ibanHint">Δικαιούχος: …</p>
+        </div>
 
-<p>Οικογένεια Γαμπρού</p>
-<p>Οικογένεια Νύφης</p>
+        <div class="payCard">
+          <div class="payTop">
+            <span class="payLabel">IRIS 1</span>
+            <button class="copyBtn" type="button" data-copy="iris1">Αντιγραφή</button>
+          </div>
+          <code class="codeBox" id="iris1Code">69…</code>
+        </div>
 
-</div>
+        <div class="payCard">
+          <div class="payTop">
+            <span class="payLabel">IRIS 2</span>
+            <button class="copyBtn" type="button" data-copy="iris2">Αντιγραφή</button>
+          </div>
+          <code class="codeBox" id="iris2Code">69…</code>
+        </div>
 
-<div class="section">
+        <p class="hint" id="giftNote">Tip: Αιτιολογία “Δώρο γάμου”.</p>
+      </div>
+    </div>
+  </div>
 
-<h3>ΚΟΥΜΠΑΡΟΙ</h3>
-
-<p>Κουμπάρος</p>
-<p>Κουμπάρα</p>
-
-</div>
-
-<button class="giftButton" onclick="openGift()">🎁 Δώρο</button>
-
-<div class="phones">
-
-<p>Γαμπρός: 69XXXXXXXX</p>
-<p>Νύφη: 69XXXXXXXX</p>
-
-</div>
-
-</div>
-
-
-<div id="giftModal" class="modal">
-
-<div class="modalContent">
-
-<h3>Στοιχεία Δώρου</h3>
-
-<p><b>IBAN</b></p>
-<p>GRXXXXXXXXXXXXXXXX</p>
-
-<p><b>IRIS</b></p>
-<p>69XXXXXXXX</p>
-<p>69XXXXXXXX</p>
-
-<button onclick="closeGift()">Κλείσιμο</button>
-
-</div>
-
-</div>
-
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
